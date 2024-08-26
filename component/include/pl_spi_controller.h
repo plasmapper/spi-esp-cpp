@@ -10,7 +10,7 @@ namespace PL {
 /// @brief SPI controller class
 class SpiController : public Lockable {
 public:
-  /// @brief Create an SPI controller
+  /// @brief Creates an SPI controller
   /// @param spi SPI interface
   /// @param mode SPI mode (0, 1, 2 or 3)
   /// @param sclkFrequency SCLK frequency in Hz
@@ -23,11 +23,11 @@ public:
   esp_err_t Lock(TickType_t timeout = portMAX_DELAY) override;
   esp_err_t Unlock() override;
 
-  /// @brief Initialize the controller
+  /// @brief Initializes the controller
   /// @return error code
   esp_err_t Initialize();
 
-  /// @brief Execute SPI controller transaction
+  /// @brief Executes SPI controller transaction
   /// @param command command bits
   /// @param address address bits
   /// @param writeData data bits to write to the target (can be NULL)
@@ -36,15 +36,15 @@ public:
   /// @return error code
   esp_err_t Transaction(uint16_t command, uint64_t address, const void* writeData, void* readData, size_t dataSize);
 
-  /// @brief Set the number of command bits (first written bits before read, may be called only before Initialize)
+  /// @brief Sets the number of command bits (first written bits before read, may be called only before Initialize)
   /// @param numberOfCommandBits number of command bits (0..16)
   esp_err_t SetNumberOfCommandBits(int numberOfCommandBits);
 
-  /// @brief Set the number of address bits (bits written after command bits before read, may be called only before Initialize)
+  /// @brief Sets the number of address bits (bits written after command bits before read, may be called only before Initialize)
   /// @param numberOfAddressBits number of address bits (0..64)
   esp_err_t SetNumberOfAddressBits(int numberOfAddressBits);
 
-  /// @brief Set the max delay between the SCLK edge and the valid MISO level (may be called only before Initialize)
+  /// @brief Sets the max delay between the SCLK edge and the valid MISO level (may be called only before Initialize)
   /// @param delay delay in ns
   esp_err_t SetMaxSclkMisoDelay(int delay);
 

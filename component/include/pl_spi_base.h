@@ -16,7 +16,7 @@ public:
   /// @brief Default max transaction size in bytes
   static const int defaultMaxTransactionSize = 32;
 
-  /// @brief Create an SPI
+  /// @brief Creates an SPI
   /// @param host SPI host (HSPI_HOST or VSPI_HOST)
   /// @param mosiPin MOSI pin
   /// @param misoPin MISO pin
@@ -29,7 +29,7 @@ public:
   esp_err_t Lock(TickType_t timeout = portMAX_DELAY) override;
   esp_err_t Unlock() override;
 
-  /// @brief Set the max transaction size (may be called only before Initialize)
+  /// @brief Sets the max transaction size (may be called only before Initialize)
   /// @param maxTransactionSize max transaction size in bytes
   /// @return error code
   esp_err_t SetMaxTransactionSize(int maxTransactionSize);

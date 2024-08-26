@@ -29,14 +29,14 @@ esp_err_t Spi::Lock(TickType_t timeout) {
     return ESP_OK;
   if (error == ESP_ERR_TIMEOUT && timeout == 0)
     return ESP_ERR_TIMEOUT;
-  ESP_RETURN_ON_ERROR (error, TAG, "mutex lock failed");
+  ESP_RETURN_ON_ERROR(error, TAG, "mutex lock failed");
   return ESP_OK;
 }
 
 //==============================================================================
 
 esp_err_t Spi::Unlock() {
-  ESP_RETURN_ON_ERROR (mutex.Unlock(), TAG, "mutex unlock failed");
+  ESP_RETURN_ON_ERROR(mutex.Unlock(), TAG, "mutex unlock failed");
   return ESP_OK;
 }
 
@@ -44,7 +44,7 @@ esp_err_t Spi::Unlock() {
 
 esp_err_t Spi::SetMaxTransactionSize(int maxTransactionSize) {
   LockGuard lg(*this);
-  ESP_RETURN_ON_FALSE (!initialized, ESP_ERR_INVALID_STATE, TAG, "SPI interface is already initialized");
+  ESP_RETURN_ON_FALSE(!initialized, ESP_ERR_INVALID_STATE, TAG, "SPI interface is already initialized");
   this->maxTransactionSize = maxTransactionSize;
   return ESP_OK;
 }

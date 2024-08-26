@@ -5,7 +5,7 @@ SPI Component
 
 .. |ESP_IDF_VERSION| replace:: 5.3
    
-.. |VERSION| replace:: 1.0.0
+.. |VERSION| replace:: 1.0.1
 
 .. include:: ../../../installation.rst
 
@@ -28,11 +28,12 @@ Thread safety
 
 Class method thread safety is implemented by having the :cpp:class:`PL::Lockable` as a base class and creating the class object lock guard at the beginning of the methods.
 
-::cpp:func:`PL::SPIController::Transaction` locks both the :cpp:class:`PL::SPIController` and the :cpp:class:`PL::SPI` objects for the duration of the transaction. 
+::cpp:func:`PL::SPIController::Initialize` and ::cpp:func:`PL::SPIController::Transaction` lock both
+the :cpp:class:`PL::SPIController` and the :cpp:class:`PL::SPI` objects for the duration of the method. 
 
 Examples
 --------
-| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.0.0/examples/spi_controller>`_
+| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.0.1/examples/spi_controller>`_
 
 API reference
 -------------

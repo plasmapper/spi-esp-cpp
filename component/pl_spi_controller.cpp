@@ -43,35 +43,29 @@ esp_err_t SpiController::Unlock() {
 //==============================================================================
 
 esp_err_t SpiController::Initialize() {
-  spi_host_device_t host;
-  {
-    LockGuard lg(*spi);
-    host = spi->host;
-    if (!spi->initialized) {
-      spi_bus_config_t busConfig = {};
-      busConfig.mosi_io_num = spi->mosiPin;
-      busConfig.miso_io_num = spi->misoPin;
-      busConfig.sclk_io_num = spi->sclkPin;
-      busConfig.quadwp_io_num = -1;
-      busConfig.quadhd_io_num = -1;
-      busConfig.max_transfer_sz = spi->maxTransactionSize;
-      ESP_RETURN_ON_ERROR(spi_bus_initialize(spi->host, &busConfig, SPI_DMA_DISABLED), TAG, "initialize SPI controller bus failed");
-    }
+  LockGuard lg(*this, *spi);
+
+  if (!spi->initialized) {
+    spi_bus_config_t busConfig = {};
+    busConfig.mosi_io_num = spi->mosiPin;
+    busConfig.miso_io_num = spi->misoPin;
+    busConfig.sclk_io_num = spi->sclkPin;
+    busConfig.quadwp_io_num = -1;
+    busConfig.quadhd_io_num = -1;
+    busConfig.max_transfer_sz = spi->maxTransactionSize;
+    ESP_RETURN_ON_ERROR(spi_bus_initialize(spi->host, &busConfig, SPI_DMA_DISABLED), TAG, "initialize SPI controller bus failed");
   }
 
-  {
-    LockGuard lg(*this);
-    if (!deviceHandle) {
-      spi_device_interface_config_t deviceConfig = {};
-      deviceConfig.command_bits = numberOfCommandBits;
-      deviceConfig.address_bits = numberOfAddressBits;
-      deviceConfig.mode = mode;
-      deviceConfig.clock_speed_hz = sclkFrequency;
-      deviceConfig.spics_io_num = csPin;
-      deviceConfig.queue_size = 1;
-      deviceConfig.input_delay_ns = maxSclkMisoDelay;
-      ESP_RETURN_ON_ERROR(spi_bus_add_device(host, &deviceConfig, &deviceHandle), TAG, "initialize SPI controller device failed");
-    }
+  if (!deviceHandle) {
+    spi_device_interface_config_t deviceConfig = {};
+    deviceConfig.command_bits = numberOfCommandBits;
+    deviceConfig.address_bits = numberOfAddressBits;
+    deviceConfig.mode = mode;
+    deviceConfig.clock_speed_hz = sclkFrequency;
+    deviceConfig.spics_io_num = csPin;
+    deviceConfig.queue_size = 1;
+    deviceConfig.input_delay_ns = maxSclkMisoDelay;
+    ESP_RETURN_ON_ERROR(spi_bus_add_device(spi->host, &deviceConfig, &deviceHandle), TAG, "initialize SPI controller device failed");
   }
 
   return ESP_OK;
@@ -80,24 +74,19 @@ esp_err_t SpiController::Initialize() {
 //==============================================================================
 
 esp_err_t SpiController::Transaction(uint16_t command, uint64_t address, const void* writeData, void* readData, size_t dataSize) {
-  spi_device_handle_t deviceHandle;
+  LockGuard lg(*this, *spi);
+
+  ESP_RETURN_ON_FALSE(deviceHandle, ESP_ERR_INVALID_STATE, TAG, "SPI controller is not initialized");
+
   spi_transaction_t transaction = {};
-  {
-    LockGuard lg(*this);
-    deviceHandle = this->deviceHandle;
-    transaction.cmd = command;
-    transaction.addr = address;
-    transaction.length = dataSize;
-    transaction.tx_buffer = writeData;
-    transaction.rx_buffer = readData;
-    ESP_RETURN_ON_FALSE(deviceHandle, ESP_ERR_INVALID_STATE, TAG, "SPI controller is not initialized");
-  }
-  
-  {
-    LockGuard lg(*spi);
-    ESP_RETURN_ON_ERROR(spi_device_polling_transmit(deviceHandle, &transaction), TAG, "SPI transaction failed");
-    return ESP_OK;
-  }
+  transaction.cmd = command;
+  transaction.addr = address;
+  transaction.length = dataSize;
+  transaction.tx_buffer = writeData;
+  transaction.rx_buffer = readData;
+  ESP_RETURN_ON_ERROR(spi_device_polling_transmit(deviceHandle, &transaction), TAG, "SPI transaction failed");
+
+  return ESP_OK;
 }
 
 //==============================================================================

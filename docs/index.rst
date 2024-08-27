@@ -28,7 +28,7 @@ Thread safety
 
 Class method thread safety is implemented by having the :cpp:class:`PL::Lockable` as a base class and creating the class object lock guard at the beginning of the methods.
 
-::cpp:func:`PL::SpiController::Initialize` and ::cpp:func:`PL::SpiController::Transaction` lock both
+:cpp:func:`PL::SpiController::Initialize` and ::cpp:func:`PL::SpiController::Transaction` lock both
 the :cpp:class:`PL::SpiController` and the :cpp:class:`PL::Spi` objects for the duration of the method. 
 
 Examples

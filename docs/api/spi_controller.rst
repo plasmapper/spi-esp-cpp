@@ -1,6 +1,6 @@
-PL::SPIController class
+PL::SpiController class
 =======================
 
-.. doxygenclass:: PL::SPIController
+.. doxygenclass:: PL::SpiController
   :members:
   :protected-members:

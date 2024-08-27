@@ -1,6 +1,6 @@
-PL::SPI class
+PL::Spi class
 =============
 
-.. doxygenclass:: PL::SPI
+.. doxygenclass:: PL::Spi
   :members:
   :protected-members:

@@ -14,12 +14,12 @@ SPI Component
 Features
 --------
 
-1. :cpp:class:`PL::SPI` - an SPI interface class that is used for several SPI controllers that use the same interface.
+1. :cpp:class:`PL::Spi` - an SPI interface class that is used for several SPI controllers that use the same interface.
    A number of Set methods can be used to set the SPI interface parameters before its initialization.
-2. :cpp:class:`PL::SPIController` - an SPI controller class that is used for communication with a single SPI target.
-   :cpp:func:`PL::SPIController::Initialize` initializes the SPI interface (if it has not been previously initialized) and the SPI controller.
+2. :cpp:class:`PL::SpiController` - an SPI controller class that is used for communication with a single SPI target.
+   :cpp:func:`PL::SpiController::Initialize` initializes the SPI interface (if it has not been previously initialized) and the SPI controller.
    A number of Set methods can be used to set the SPI controller parameters before its initialization.
-   :cpp:func:`PL::SPIController::Transaction` executes an SPI transaction.
+   :cpp:func:`PL::SpiController::Transaction` executes an SPI transaction.
 
 SPI target and DMA transactions are not implemented yet.
 
@@ -28,8 +28,8 @@ Thread safety
 
 Class method thread safety is implemented by having the :cpp:class:`PL::Lockable` as a base class and creating the class object lock guard at the beginning of the methods.
 
-::cpp:func:`PL::SPIController::Initialize` and ::cpp:func:`PL::SPIController::Transaction` lock both
-the :cpp:class:`PL::SPIController` and the :cpp:class:`PL::SPI` objects for the duration of the method. 
+::cpp:func:`PL::SpiController::Initialize` and ::cpp:func:`PL::SpiController::Transaction` lock both
+the :cpp:class:`PL::SpiController` and the :cpp:class:`PL::Spi` objects for the duration of the method. 
 
 Examples
 --------

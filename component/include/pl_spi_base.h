@@ -29,6 +29,10 @@ public:
   esp_err_t Lock(TickType_t timeout = portMAX_DELAY) override;
   esp_err_t Unlock() override;
 
+  /// @brief Initializes the SPI
+  /// @return error code
+  esp_err_t Initialize();
+
   /// @brief Sets the max transaction size (may be called only before Initialize)
   /// @param maxTransactionSize max transaction size in bytes
   /// @return error code

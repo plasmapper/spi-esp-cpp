@@ -42,6 +42,24 @@ esp_err_t Spi::Unlock() {
 
 //==============================================================================
 
+esp_err_t Spi::Initialize() {
+  LockGuard lg(*this);
+  if (initialized)
+    return ESP_OK;
+  spi_bus_config_t busConfig = {};
+  busConfig.mosi_io_num = mosiPin;
+  busConfig.miso_io_num = misoPin;
+  busConfig.sclk_io_num = sclkPin;
+  busConfig.quadwp_io_num = -1;
+  busConfig.quadhd_io_num = -1;
+  busConfig.max_transfer_sz = maxTransactionSize;
+  ESP_RETURN_ON_ERROR(spi_bus_initialize(host, &busConfig, SPI_DMA_DISABLED), TAG, "SPI bus initialize failed");
+  initialized = true;
+  return ESP_OK;
+}
+
+//==============================================================================
+
 esp_err_t Spi::SetMaxTransactionSize(int maxTransactionSize) {
   LockGuard lg(*this);
   ESP_RETURN_ON_FALSE(!initialized, ESP_ERR_INVALID_STATE, TAG, "SPI interface is already initialized");

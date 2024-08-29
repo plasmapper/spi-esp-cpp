@@ -46,14 +46,7 @@ esp_err_t SpiController::Initialize() {
   LockGuard lg(*this, *spi);
 
   if (!spi->initialized) {
-    spi_bus_config_t busConfig = {};
-    busConfig.mosi_io_num = spi->mosiPin;
-    busConfig.miso_io_num = spi->misoPin;
-    busConfig.sclk_io_num = spi->sclkPin;
-    busConfig.quadwp_io_num = -1;
-    busConfig.quadhd_io_num = -1;
-    busConfig.max_transfer_sz = spi->maxTransactionSize;
-    ESP_RETURN_ON_ERROR(spi_bus_initialize(spi->host, &busConfig, SPI_DMA_DISABLED), TAG, "initialize SPI controller bus failed");
+    ESP_RETURN_ON_ERROR(spi->Initialize(), TAG, "SPI initialize failed");
   }
 
   if (!deviceHandle) {
@@ -65,7 +58,7 @@ esp_err_t SpiController::Initialize() {
     deviceConfig.spics_io_num = csPin;
     deviceConfig.queue_size = 1;
     deviceConfig.input_delay_ns = maxSclkMisoDelay;
-    ESP_RETURN_ON_ERROR(spi_bus_add_device(spi->host, &deviceConfig, &deviceHandle), TAG, "initialize SPI controller device failed");
+    ESP_RETURN_ON_ERROR(spi_bus_add_device(spi->host, &deviceConfig, &deviceHandle), TAG, "SPI bus add device failed");
   }
 
   return ESP_OK;

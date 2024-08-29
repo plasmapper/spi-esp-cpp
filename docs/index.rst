@@ -5,7 +5,7 @@ SPI Component
 
 .. |ESP_IDF_VERSION| replace:: 5.3
    
-.. |VERSION| replace:: 1.0.1
+.. |VERSION| replace:: 1.0.2
 
 .. include:: ../../../installation.rst
 
@@ -15,9 +15,10 @@ Features
 --------
 
 1. :cpp:class:`PL::Spi` - an SPI interface class that is used for several SPI controllers that use the same interface.
+   :cpp:func:`PL::Spi::Initialize` initializes the SPI interface.
    A number of Set methods can be used to set the SPI interface parameters before its initialization.
 2. :cpp:class:`PL::SpiController` - an SPI controller class that is used for communication with a single SPI target.
-   :cpp:func:`PL::SpiController::Initialize` initializes the SPI interface (if it has not been previously initialized) and the SPI controller.
+   :cpp:func:`PL::SpiController::Initialize` initializes the SPI interface and the SPI controller.
    A number of Set methods can be used to set the SPI controller parameters before its initialization.
    :cpp:func:`PL::SpiController::Transaction` executes an SPI transaction.
 
@@ -33,7 +34,7 @@ the :cpp:class:`PL::SpiController` and the :cpp:class:`PL::Spi` objects for the 
 
 Examples
 --------
-| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.0.1/examples/spi_controller>`_
+| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.0.2/examples/spi_controller>`_
 
 API reference
 -------------

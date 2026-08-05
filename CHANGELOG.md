@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lock timeout handling.
 - Static const members to constexpr.
 
+### Fixed
+- Uninitialized max transaction size.
+
 ## [1.0.2] - 2024-08-29
 ### Fixed
 - Interface initialization.

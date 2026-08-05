@@ -42,7 +42,7 @@ private:
   Mutex mutex;
   spi_host_device_t host;
   int mosiPin, misoPin, sclkPin;
-  int maxTransactionSize;
+  int maxTransactionSize = defaultMaxTransactionSize;
   bool initialized = false;
 };
 

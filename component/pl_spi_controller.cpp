@@ -84,6 +84,7 @@ esp_err_t SpiController::Transaction(uint16_t command, uint64_t address, const v
 esp_err_t SpiController::SetNumberOfCommandBits(int numberOfCommandBits) {
   LockGuard lg(*this);
   ESP_RETURN_ON_FALSE(!deviceHandle, ESP_ERR_INVALID_STATE, TAG, "SPI controller is already initialized");
+  ESP_RETURN_ON_FALSE(numberOfCommandBits >= 0 && numberOfCommandBits <= maxNumberOfCommandBits, ESP_ERR_INVALID_ARG, TAG, "invalid number of command bits (%d)", numberOfCommandBits);
   this->numberOfCommandBits = numberOfCommandBits;
   return ESP_OK;
 }
@@ -93,6 +94,7 @@ esp_err_t SpiController::SetNumberOfCommandBits(int numberOfCommandBits) {
 esp_err_t SpiController::SetNumberOfAddressBits(int numberOfAddressBits) {
   LockGuard lg(*this);
   ESP_RETURN_ON_FALSE(!deviceHandle, ESP_ERR_INVALID_STATE, TAG, "SPI controller is already initialized");
+  ESP_RETURN_ON_FALSE(numberOfAddressBits >= 0 && numberOfAddressBits <= maxNumberOfAddressBits, ESP_ERR_INVALID_ARG, TAG, "invalid number of address bits (%d)", numberOfAddressBits);
   this->numberOfAddressBits = numberOfAddressBits;
   return ESP_OK;
 }

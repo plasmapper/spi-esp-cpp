@@ -10,6 +10,11 @@ namespace PL {
 /// @brief SPI controller class
 class SpiController : public Lockable {
 public:
+  /// @brief Max number of command bits
+  static constexpr int maxNumberOfCommandBits = 16;
+  /// @brief Max number of address bits
+  static constexpr int maxNumberOfAddressBits = 64;
+
   /// @brief Creates an SPI controller
   /// @param spi SPI interface
   /// @param mode SPI mode (0, 1, 2 or 3)
@@ -37,11 +42,11 @@ public:
   esp_err_t Transaction(uint16_t command, uint64_t address, const void* writeData, void* readData, size_t dataSize);
 
   /// @brief Sets the number of command bits (first written bits before read, may be called only before Initialize)
-  /// @param numberOfCommandBits number of command bits (0..16)
+  /// @param numberOfCommandBits number of command bits (0..maxNumberOfCommandBits)
   esp_err_t SetNumberOfCommandBits(int numberOfCommandBits);
 
   /// @brief Sets the number of address bits (bits written after command bits before read, may be called only before Initialize)
-  /// @param numberOfAddressBits number of address bits (0..64)
+  /// @param numberOfAddressBits number of address bits (0..maxNumberOfAddressBits)
   esp_err_t SetNumberOfAddressBits(int numberOfAddressBits);
 
   /// @brief Sets the max delay between the SCLK edge and the valid MISO level (may be called only before Initialize)

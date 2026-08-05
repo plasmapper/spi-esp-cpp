@@ -14,7 +14,7 @@ class Spi : public Lockable {
 
 public:
   /// @brief Default max transaction size in bytes
-  static const int defaultMaxTransactionSize = 32;
+  static constexpr int defaultMaxTransactionSize = 32;
 
   /// @brief Creates an SPI
   /// @param host SPI host (HSPI_HOST or VSPI_HOST)

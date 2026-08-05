@@ -32,7 +32,8 @@ public:
   /// @return error code
   esp_err_t Initialize();
 
-  /// @brief Executes SPI controller transaction
+  /// @brief Executes SPI controller transaction. Uses polling transmission, which blocks for the full duration
+  /// of the transaction instead of yielding to other tasks, so it is best suited to short transactions.
   /// @param command command bits
   /// @param address address bits
   /// @param writeData data bits to write to the target (can be NULL)

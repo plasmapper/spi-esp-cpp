@@ -5,7 +5,7 @@ SPI Component
 
 .. |ESP_IDF_VERSION| replace:: 5.3
    
-.. |VERSION| replace:: 1.0.3
+.. |VERSION| replace:: 1.1.0
 
 .. include:: ../../../installation.rst
 
@@ -34,7 +34,7 @@ the :cpp:class:`PL::SpiController` and the :cpp:class:`PL::Spi` objects for the 
 
 Examples
 --------
-| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.0.3/examples/spi_controller>`_
+| `SPI controller <https://components.espressif.com/components/plasmapper/pl_spi/versions/1.1.0/examples/spi_controller>`_
 
 API reference
 -------------

@@ -2,7 +2,7 @@
 
 //==============================================================================
 
-const spi_host_device_t host = HSPI_HOST;
+const spi_host_device_t host = SPI2_HOST;
 const int mosiPin = 5;
 const int misoPin = 18;
 const int sclkPin = 19;

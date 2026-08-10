@@ -17,7 +17,7 @@ public:
   static constexpr int defaultMaxTransactionSize = 32;
 
   /// @brief Creates an SPI
-  /// @param host SPI host (HSPI_HOST or VSPI_HOST)
+  /// @param host SPI host (typically SPI2_HOST or SPI3_HOST)
   /// @param mosiPin MOSI pin
   /// @param misoPin MISO pin
   /// @param sclkPin SCLK pin

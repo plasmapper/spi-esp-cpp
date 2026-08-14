@@ -44,14 +44,17 @@ public:
 
   /// @brief Sets the number of command bits (first written bits before read, may be called only before Initialize)
   /// @param numberOfCommandBits number of command bits (0..maxNumberOfCommandBits)
+  /// @return error code
   esp_err_t SetNumberOfCommandBits(int numberOfCommandBits);
 
   /// @brief Sets the number of address bits (bits written after command bits before read, may be called only before Initialize)
   /// @param numberOfAddressBits number of address bits (0..maxNumberOfAddressBits)
+  /// @return error code
   esp_err_t SetNumberOfAddressBits(int numberOfAddressBits);
 
   /// @brief Sets the max delay between the SCLK edge and the valid MISO level (may be called only before Initialize)
   /// @param delay delay in ns
+  /// @return error code
   esp_err_t SetMaxSclkMisoDelay(int delay);
 
 private:

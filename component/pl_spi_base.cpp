@@ -60,6 +60,7 @@ esp_err_t Spi::Initialize() {
 esp_err_t Spi::SetMaxTransactionSize(int maxTransactionSize) {
   LockGuard lg(*this);
   ESP_RETURN_ON_FALSE(!initialized, ESP_ERR_INVALID_STATE, TAG, "SPI interface is already initialized");
+  ESP_RETURN_ON_FALSE(maxTransactionSize >= 0, ESP_ERR_INVALID_ARG, TAG, "invalid max transaction size");
   this->maxTransactionSize = maxTransactionSize;
   return ESP_OK;
 }

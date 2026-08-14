@@ -34,7 +34,7 @@ public:
   esp_err_t Initialize();
 
   /// @brief Sets the max transaction size (may be called only before Initialize)
-  /// @param maxTransactionSize max transaction size in bytes
+  /// @param maxTransactionSize max transaction size in bytes (0 means default)
   /// @return error code
   esp_err_t SetMaxTransactionSize(int maxTransactionSize);
 

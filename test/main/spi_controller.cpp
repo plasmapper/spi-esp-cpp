@@ -42,5 +42,5 @@ void TestSpiController() {
   uint8_t receivedData[sizeof(dataToSend)] = {};
   TEST_ASSERT(controller.Transaction(command, address, dataToSend, receivedData, sizeof(dataToSend) * 8) == ESP_OK);
   for (size_t i = 0; i < sizeof(dataToSend); i++)
-    TEST_ASSERT_EQUAL_MESSAGE(dataToSend[i], receivedData[i], "Make sure that MOSI and MISO pins are connected with a wire.");
+    TEST_ASSERT_EQUAL_MESSAGE(dataToSend[i], receivedData[i], "Make sure that MOSI (5) and MISO (18) pins are connected with a wire.");
 }

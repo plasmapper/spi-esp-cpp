@@ -7,6 +7,7 @@
 extern "C" void app_main(void) {
   UNITY_BEGIN();
   RUN_TEST(TestSpi);
-  RUN_TEST(TestSpiController);
+  RUN_TEST(TestSpiControllerSmallTransaction);
+  RUN_TEST(TestSpiControllerLargeTransaction);
   UNITY_END();
 }

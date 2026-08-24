@@ -50,7 +50,8 @@ esp_err_t Spi::Initialize() {
   busConfig.quadwp_io_num = -1;
   busConfig.quadhd_io_num = -1;
   busConfig.max_transfer_sz = maxTransactionSize;
-  ESP_RETURN_ON_ERROR(spi_bus_initialize(host, &busConfig, SPI_DMA_DISABLED), TAG, "SPI bus initialize failed");
+  spi_dma_chan_t dmaChannel = maxTransactionSize > SOC_SPI_MAXIMUM_BUFFER_SIZE ? SPI_DMA_CH_AUTO : SPI_DMA_DISABLED;
+  ESP_RETURN_ON_ERROR(spi_bus_initialize(host, &busConfig, dmaChannel), TAG, "SPI bus initialize failed");
   initialized = true;
   return ESP_OK;
 }

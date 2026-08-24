@@ -2,4 +2,5 @@
 
 //==============================================================================
 
-void TestSpiController();
+void TestSpiControllerSmallTransaction();
+void TestSpiControllerLargeTransaction();

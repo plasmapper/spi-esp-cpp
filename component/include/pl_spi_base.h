@@ -34,7 +34,9 @@ public:
   esp_err_t Initialize();
 
   /// @brief Sets the max transaction size (may be called only before Initialize)
-  /// @param maxTransactionSize max transaction size in bytes (0 means default)
+  /// @param maxTransactionSize max transaction size in bytes (0 means SOC_SPI_MAXIMUM_BUFFER_SIZE)
+  /// @note Sizes that exceed SOC_SPI_MAXIMUM_BUFFER_SIZE enable DMA, which requires the
+  /// transaction buffers to be allocated in DMA-capable memory.
   /// @return error code
   esp_err_t SetMaxTransactionSize(int maxTransactionSize);
 

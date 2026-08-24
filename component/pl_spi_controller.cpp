@@ -12,7 +12,10 @@ namespace PL {
 //==============================================================================
 
 SpiController::SpiController(std::shared_ptr<Spi> spi, uint8_t mode, int sclkFrequency, int csPin) :
-    spi(spi), mode(mode), sclkFrequency(sclkFrequency), csPin(csPin) { }
+    spi(spi), mode(mode), sclkFrequency(sclkFrequency), csPin(csPin) {
+  if (mode > 3)
+    this->mode = 0;
+}
 
 //==============================================================================
 

@@ -20,8 +20,10 @@ SpiController::SpiController(std::shared_ptr<Spi> spi, uint8_t mode, int sclkFre
 //==============================================================================
 
 SpiController::~SpiController() {
-  if (deviceHandle)
+  if (deviceHandle) {
+    LockGuard lg(*this, *spi);
     spi_bus_remove_device(deviceHandle);
+  }
 }
 
 //==============================================================================
